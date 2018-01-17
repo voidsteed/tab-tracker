@@ -16,5 +16,8 @@ fs
   .filter((file) =>
     file !== 'index.js'
   )
+  .forEach((file) => {
+    const model = sequelize.import(path.join(__dirname, file))
+  })
 
 module.exports = db
