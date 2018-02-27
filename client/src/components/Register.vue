@@ -20,7 +20,7 @@
           <div class="error" v-html="error"/>
           <br>
           <v-btn
-            class="cyan"
+            class="cyan" dark
             @click="register">
             Register
           </v-btn>
