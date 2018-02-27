@@ -6,17 +6,16 @@
           <v-toolbar-title>Register</v-toolbar-title>
         </v-toolbar>
         <div class="pl-4 pr-4 pt-2 pb-2">
-          <input
-            type="email"
-            name="email"
+          <v-text-field
+            label="Email"
             v-model="email"
-            placeholder="email"/>
+            ></v-text-field>
+
           <br>
-          <input
-            type="password"
-            name="password"
+          <v-text-field
+            label="Password"
             v-model="password"
-            placeholder="password"/>
+            ></v-text-field>
           <br>
           <div class="error" v-html="error"/>
           <br>
@@ -60,4 +59,6 @@ export default {
 .error {
   color: red;
 }
+
+
 </style>
