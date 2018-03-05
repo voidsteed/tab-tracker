@@ -43,7 +43,7 @@ export default {
   methods: {
     async login () {
       try {
-        await AuthenticationService.register({
+        await AuthenticationService.login({
           email: this.email,
           password: this.password
         })

@@ -3,11 +3,9 @@ const bcrypt = Promise.promisifyAll(require('bcrypt-nodejs'))
 
 function hashPassword (user, options) {
   const SALT_FACTOR = 8
-  console.log('hashPassword')
-  console.log(!user.changed('password'))
 
   if (!user.changed('password')) {
-    return;
+    return
   }
 
   return bcrypt
@@ -16,6 +14,9 @@ function hashPassword (user, options) {
     .then(hash => {
       user.setDataValue('password', hash)
     })
+    .catch(function(err) {
+      return sequelize.Promise.reject(err);
+    });
 }
 
 module.exports = (sequelize, DataTypes) => {
@@ -24,19 +25,22 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       unique: true
     },
-     password: DataTypes.STRING
-   }, {
-      hooks: {
-        beforeCreate: hashPassword,
-        beforeUpdate: hashPassword,
-        beforeSave: hashPassword
-      }
-   })
+    password: DataTypes.STRING
+  },
+  {
+    hooks: {
+      beforeCreate: hashPassword,
+      beforeSave: hashPassword,
+      beforeUpdate: hashPassword
+    }
+  })
 
   User.prototype.comparePassword = function (password) {
-    console.log(password, this.password)
-    console.log(bcrypt.compare(password, this.password))
-    return bcrypt.compare(password, this.password)
+    console.log('in user model ======>', password, this.password)
+    return bcrypt.compareAsync(password, this.password);
+  }
+
+  User.associate = function (models) {
   }
 
   return User

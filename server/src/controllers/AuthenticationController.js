@@ -30,12 +30,13 @@ module.exports = {
         }
       })
       if (!user) {
-        res.status(403).send({
-          error: 'The login information was incorrect'
+        return res.status(403).send({
+          error: 'The login information was incorrect, user obj issue'
         })
       }
 
-      const isPasswordValid = await user.comparePassword(password)
+      const isPasswordValid = user.comparePassword(password)
+      console.log('is it valid========> ', isPasswordValid)
       if (!isPasswordValid) {
         res.status(403).send({
           error: 'The login information was incorrect'
@@ -49,8 +50,8 @@ module.exports = {
       })
     } catch (err) {
       res.status(500).send({
-        error: 'An error has occured trying to log in.'
+        error: 'An error has occured trying to log in. 500'
       })
     }
-  },
+  }
 }
