@@ -7,12 +7,18 @@
         TabTracker
        </span>
     </v-toolbar-title>
-    <!-- <v-toolbar-items>
-      <v-btn flat fark>
+
+    <v-toolbar-items>
+      <v-btn
+        flat
+        dark
+        @click="navigateTo({name: 'songs'})">
         Browse
-      </v-btn>
-    </v-toolbar-items> -->
+       </v-btn>
+    </v-toolbar-items>
+
     <v-spacer></v-spacer>
+
     <v-toolbar-items>
       <v-btn
         v-if="!$store.state.isUserLoggedIn"
