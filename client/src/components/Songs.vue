@@ -4,9 +4,9 @@
       <panel title="Songs">
         <div
         v-for="song in songs"
-        :key="song.title">
-        {{song.title}}
-        {{song.artist}}
+        :key="song.id">
+        {{song.title}} -
+        {{song.artist}} -
         {{song.album}}
         </div>
       </panel>
@@ -16,20 +16,19 @@
 
 <script>
 import Panel from '@/components/Panel'
+import SongsService from '@/services/SongsService'
 export default {
   components: {
     Panel
   },
   data () {
     return {
-      songs: [
-        {
-          title: 'Float On',
-          artist: 'Modest Mouse',
-          album: 'Good News for People who Love Bad News'
-        }
-      ]
+      songs: null
     }
+  },
+  async mounted () {
+    // backend request to get all songs
+    this.songs = (await SongsService.index()).data
   }
 }
 </script>
